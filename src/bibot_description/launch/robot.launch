@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <arg name="scan_topic"  default="/scan" />
+  <arg name="base_frame"  default="base_link"/>
+  <!--    <arg name="odom_frame"  default="odom"/>-->
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0"/>
+
+ <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"></node>-->
+
+  <!-- Launch other relevant files-->
+  <include file="$(find bibot_description)/launch/robot_description.launch"/>
+
+  <!--World File -->
+	<arg name="world_file" default="$(find bibot_simulation)/worlds/world/car_1_junction.world"/>
+  
+  <!-- Launch Gazebo World -->  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="use_sim_time" value="false"/>
+	<arg name="debug" value="false"/>
+	<arg name="gui" value="false" />
+	<!--<arg name="world_name" value="$(arg world_file)"/>-->
+	</include>
+
+  <!-- Spawn My Robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+		args="-urdf -param robot_description -model robot.xacro
+			  -x $(arg x) -y $(arg y) -z $(arg z)
+			  -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
+
+  <!--<node pkg="tf" type="static_transform_publisher" name="base_to_kinect" args=" x y z r p y base_link kinect_camera 100" />-->
+  <!--<node pkg="tf" type="static_transform_publisher" name="base_to_laser" args=" x y z r p y base_link laser_frame 100" />-->
+  <node pkg="tf" type="static_transform_publisher" name="static_tf_kinect2_lidar" args="0.125 0.09 -0.08 -1.5 0.0 -1.34 laser_frame kinect2_link 100" respawn="true"/> <!-- 10Hz-->
+
+  <!--<node pkg="tf" type="static_transform_publisher" name="base_to_kinect_rgb" args=" x y z r p y base_link kinect2_rgb_optical_frame 100" />-->
+   
+ <!-- <arg name="map_file" default="$(find robot)/maps/house_map.yaml" />
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+ 
+  <include file="$(find robot)/launch/amcl.launch"/>
+
+  
+  <node pkg="rviz" type="rviz" name="rviz" respawn="false" args="-d $(find robot)/config/rviz_config.rviz"/>
+
+  <include file="$(find robot)/launch/gmapping.launch"/>
+
+ 
+  <include file="$(find robot)/launch/move_base.launch"/>-->
+
+</launch>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="open_rviz" default="false"/>
+    <include file="$(find bibot_navigation)/launch/rtabmap.launch"/>
+    <group if="$(arg open_rviz)">
+        <include file="$(find bibot_navigation)/launch/view_rtabmap.launch"/>
+    </group>
+</launch>

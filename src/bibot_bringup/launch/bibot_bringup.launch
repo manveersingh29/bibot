@@ -1,0 +1,9 @@
+<launch>
+    <include file="$(find bibot_bringup)/launch/X2.launch"/>
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch">
+        <arg name="publish_tf" value="true" /> 
+    </include>
+    <node pkg="tf" type="static_transform_publisher" name="static_tf_kinect2_inverted_link" args="0.0 0.0 0.0 1.57 -1.57 0.0 kinect2_link kinect2_laser_link 100" respawn="true"/> 
+    
+
+</launch>

@@ -1,0 +1,290 @@
+<?xml version='1.0'?>
+
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<!--<xacro:include filename="$(find bibot_description)/urdf/robot.gazebo" />-->
+
+	<!--xacro:include filename="$(find bibot_description)/sensors/kinect_v2/urdf/kinect_v2.urdf.xacro" />-->
+    <!--<link name="root"/>-->
+    <!--<xacro:kinect_v2  parent="robot_body">
+        <origin xyz="0.3 0 0.3"
+                rpy="0 0 0" />
+    </xacro:kinect_v2>-->
+
+	<material name="black">
+		<color rgba="0 0 0 1"/>
+	</material>
+
+	<link name='base_link'> </link>
+
+	<joint name="base_link_joint" type="fixed"> 
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<parent link="base_link"/>
+		<child link="robot_body" />
+	</joint>
+
+	<link name='robot_body'>
+		<pose>0 0 0 0 0 0</pose>
+
+		<inertial>
+			<mass value="3"/>
+			<origin xyz="0 0 0" rpy=" 0 0 0"/>
+			<inertia
+					ixx="0.4298" ixy="0" ixz="0"
+					iyy="0.207" iyz="0"
+					izz="0.236"
+			/>
+		</inertial>
+
+		<collision name='robot_collision'>
+			<origin xyz="0.0 0 0.06" rpy=" 0 0 0"/>
+			<geometry>
+				<box size="0.53 0.385 0.15"/>
+			</geometry>
+		</collision>
+
+		<visual name='robot_visual'>
+			<origin xyz="0.0 0 0.06" rpy=" 0 0 0"/>
+			<geometry>
+				<box size="0.53 0.385 0.15"/>
+			</geometry>
+		</visual>
+	</link>
+	
+	<link name='left_wheel'>
+		<pose>0 0 0 0 0 0</pose>
+
+		<inertial>
+			<mass value="2"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia
+					ixx="0.000225" ixy="0" ixz="0"
+					iyy="0.000225" iyz="0"
+					izz="0.0004375"
+			/>
+		</inertial>
+
+		<collision name='left_wheel_collision'>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.06" length="0.04"/>
+			</geometry>
+		</collision>
+
+		<visual name='left_wheel_visual'>
+			<origin xyz="0 0 0" rpy="0 0 0"/>   
+			<geometry>
+				<cylinder radius="0.06" length="0.04"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+	</link>
+
+	<link name='right_wheel'>
+		<pose>0 0 0 0 0 0</pose>
+
+		<inertial>
+			<mass value="2"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia
+					ixx="0.000225" ixy="0" ixz="0"
+					iyy="0.000225" iyz="0"
+					izz="0.0004375"
+			/>
+		</inertial>
+
+		<collision name='right_wheel_collision'>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.06" length="0.04"/>
+			</geometry>
+		</collision>
+
+		<visual name='right_wheel_visual'>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.06" length="0.04"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+	</link>
+
+	<link name="caster_wheel_forward">
+	<pose>0 0 0 0 0 0</pose>
+
+	<inertial>
+			<mass value="2"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia
+					ixx="0.000225" ixy="0" ixz="0"
+					iyy="0.000225" iyz="0"
+					izz="0.0004375"
+			/>
+	</inertial>
+
+		<collision name='caster_wheel_collision'>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<sphere radius="0.05" />
+			</geometry>
+		</collision>
+
+    <visual>
+        <geometry>
+            <sphere radius="0.05" />
+        </geometry>
+        <material name="black"/>
+    </visual>
+</link>
+
+<!--<link name="caster_wheel_backward">
+	<pose>0 0 0 0 0 0</pose>
+
+	<inertial>
+			<mass value="2"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia
+					ixx="0.000225" ixy="0" ixz="0"
+					iyy="0.000225" iyz="0"
+					izz="0.0004375"
+			/>
+	</inertial>
+
+		<collision name='caster_wheel_collision'>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<sphere radius="0.05" />
+			</geometry>
+		</collision>
+
+    <visual>
+        <geometry>
+            <sphere radius="0.05" />
+        </geometry>
+        <material name="black"/>
+    </visual>
+</link>-->
+
+<!-- Link for sensors -->
+
+     <!-- Laser -->
+   <link name="laser_frame">
+    <collision>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+         <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	    <box size="0.1 0.1 0.1"/>
+	    <mesh filename="$(find bibot_description)/sensors/ydlidar/ydlidar.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+      <!-- Kinect -->
+<!--<link name="camera_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+         <box size="0.2 0.05 0.05"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	    <box size="0.2 0.05 0.05"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>-->
+
+
+
+	<joint type="continuous" name="left_wheel_hinge">
+		<origin xyz="-0.155 0.255 0" rpy="-${pi/2} 0 0"/>
+		<child link="left_wheel"/>
+		<parent link="robot_body"/>
+		<axis xyz="0 0 1" rpy="0 0 0"/>
+		<limit effort="10000" velocity="2000"/>
+		<dynamics damping="1.0" friction="1.0"/>
+	</joint>
+
+	<joint type="continuous" name="right_wheel_hinge">
+		<origin xyz="-0.155 -0.255 0" rpy="-${pi/2} 0  0 "/>
+		<child link="right_wheel"/>
+		<parent link="robot_body"/>
+		<axis xyz="0 0 1" rpy="0 0 0"/>
+		<limit effort="10000" velocity="2000"/>
+		<dynamics damping="1.0" friction="1.0"/>
+	</joint>
+
+	<joint name="caster_wheel_joint_forward" type="fixed">
+    <parent link="robot_body"/>
+    <child link="caster_wheel_forward"/>
+    <origin xyz="0.18 0 0" rpy="0 0 0"/>
+	<limit effort="10000" velocity="2000"/>
+	<dynamics damping="1.0" friction="1.0"/>
+	</joint>
+
+	<!--<joint name="caster_wheel_joint_backward" type="fixed">
+    <parent link="robot_body"/>
+    <child link="caster_wheel_backward"/>
+    <origin xyz="-0.18 0 0" rpy="0 0 0"/>
+	<limit effort="10000" velocity="2000"/>
+	<dynamics damping="1.0" friction="1.0"/>
+	</joint>-->
+
+	<joint name="laser_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="-0.21 0 0.26	" rpy="0 0 0"/>
+    <parent link="robot_body"/>
+    <child link="laser_frame"/> 	  	
+    </joint>
+
+
+ <!--   <joint name="kinect_joint" type="fixed">
+        <origin xyz="0.3 0 0.3"
+                rpy="0 0 ${pi}" />
+        <parent link="robot_body"/>
+        <child link="camera_link"/>
+    </joint>-->
+
+		
+	<gazebo reference="left_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="right_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="caster_wheel_forward">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="caster_wheel_backward">
+		<material>Gazebo/Black</material>
+	</gazebo>
+	<gazebo reference="robot_body">
+		<material>Gazebo/Yellow</material>
+	</gazebo>
+
+	
+
+</robot>

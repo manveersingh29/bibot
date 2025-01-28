@@ -1,0 +1,47 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/manveer/bibot/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/manveer/bibot/src/bibot_description/include/**",
+        "/home/manveer/bibot/src/bibot_navigation/include/**",
+        "/home/manveer/bibot/src/bibot_simulation/include/**",
+        "/home/manveer/bibot/src/bibot_teleop/include/**",
+        "/home/manveer/bibot/src/image_pipeline/depth_image_proc/include/**",
+        "/home/manveer/bibot/src/image_pipeline/image_proc/include/**",
+        "/home/manveer/bibot/src/iai_kinect2_opencv4/kinect2_bridge/include/**",
+        "/home/manveer/bibot/src/iai_kinect2_opencv4/kinect2_calibration/include/**",
+        "/home/manveer/bibot/src/iai_kinect2_opencv4/kinect2_registration/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_conversions/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_costmap_plugins/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_odom/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_rviz_plugins/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_slam/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_sync/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_util/include/**",
+        "/home/manveer/bibot/src/rtabmap_ros/rtabmap_viz/include/**",
+        "/home/manveer/bibot/src/image_pipeline/stereo_image_proc/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2_bullet/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2_eigen/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2_geometry_msgs/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2_kdl/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2_msgs/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2_ros/include/**",
+        "/home/manveer/bibot/src/geometry2/tf2_sensor_msgs/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

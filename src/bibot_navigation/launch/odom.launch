@@ -1,0 +1,14 @@
+<launch>
+    <node if="$(arg rgbd_odometry)" pkg="rtabmap_odom" type="rgbd_odometry" name="rgbd_odometry" output="screen">
+      <param name="frame_id"                    type="string" value="base_link"/>
+      <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
+      <param name="Reg/Force3DoF"               type="string" value="true"/>
+      <param name="Vis/InlierDistance"          type="string" value="0.05"/>
+      
+
+      <remap from="rgb/image"       to="$(arg rgb_topic)"/>
+      <remap from="depth/image"     to="$(arg depth_topic)"/>
+      <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
+    </node>
+
+<launch>
